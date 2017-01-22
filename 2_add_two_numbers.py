@@ -30,34 +30,39 @@ class Solution(object):
         """
         l3 = l3_head = ListNode(-1)
         over = 0
-        while l1 or l2:
+        while l1 or l2 or over:
             l1_v = l1.val if l1 else 0
             l2_v = l2.val if l2 else 0
+
+            if over and not l1 and not l2:
+                l3.next = ListNode(1)
+                over = 0
+                break
 
             s = l1_v + l2_v + over
             over = 0
             if s > 9:
-                s = 0
+                s = s % 10
                 over = 1
 
             l3.next = ListNode(s)
             l3 = l3.next
 
-            l1 = l1.next
-            l2 = l2.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
 
         return l3_head.next
 
-a = ListNode(2)
-b = ListNode(4)
-c = ListNode(3)
-a.next = b
-b.next = c
+a = ListNode(9)
+#b = ListNode(8)
+#c = ListNode(6)
+#a.next = b
+#b.next = c
 
-d = ListNode(5)
+d = ListNode(9)
 e = ListNode(6)
 f = ListNode(4)
-d.next = e
+#d.next = e
 e.next = f
 
 a.pp()
